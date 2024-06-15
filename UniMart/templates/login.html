@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/styles/login.css">
+    <style>
+        .gradient-custom-2 {
+            background-color: #f57coo;
+        }
+        .btn-primary-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-outline-custom {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        .card {
+            min-height: 400px;
+        }
+        
+        .swap-container {
+            display: flex;
+            transition: all 1s ease;
+        }
+
+        .side-panel-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .left-panel,
+        .right-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 92vh;
+        }
+        .form-content {
+            width: 100%;
+        }
+        .panel-heading {
+            margin-bottom: 15px; /* Adjust spacing between heading and form */
+        }
+        @media (max-width: 994px) {
+            .right-panel {
+                display: none !important; /* Use !important to override any other conflicting styles */
+            }
+            .left-panel {
+                min-height: 30vh;
+                border-radius: 15px !important;
+            }
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;"></div>
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0 swap-container">
+                            <div class="col-lg-6 left-panel">
+                                <div class="card-body p-md-5 mx-md-4 form-content">
+                                    <div id="login-form">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <h4 class="panel-heading">Login</h4>
+                                            <p>Please login to your account</p>
+
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <input type="email" id="email" name="email" class="form-control" placeholder="Email" />
+                                            </div>
+
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <input type="password" id="password1" name="password" class="form-control" placeholder="Password" />
+                                            </div>
+
+                                            <div class="text-center pt-1 mb-5 pb-1">
+                                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary-custom btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log in</button>
+                                            </div>
+                                        </form>
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Don't have an account?</p>
+                                            <form action="register">
+                                              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-custom" onclick="showLogin()"><a href="register">Register</a></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 right-panel gradient-custom-2 d-flex align-items-center">
+                              <div class="side-panel-content text-white px-3 py-4 p-md-5 mx-md-4">
+                                <div id="info-content">
+                                  <h4 class="mb-4">Welcome to UniMart</h4>
+                                  <p class="small mb-0">Whether you're a shopper looking for the best deals or a seller wanting to expand your reach, UniMart has something for everyone. Discover a wide range of products and services, connect with local businesses, and enjoy a seamless shopping experience.</p>
+                              </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showToast(message, type) {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white ${type === 'success' ? 'bg-success' : 'bg-danger'} border-0`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            toastContainer.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
+
+        // Display messages
+        {% if messages %}
+            {% for message in messages %}
+                showToast("{{ message }}", "{{ message.tags }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

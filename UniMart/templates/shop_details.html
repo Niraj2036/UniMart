@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seller.shop_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .shopheader {
+            display: flex;
+            align-items: center;
+            top: 0;
+            color: #f57c00;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 60%;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #ff8c00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #ff8c00;
+            font-weight: bold;
+        }eex
+        .welcome-container {
+            background-image: url('your-image-path.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 100px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .welcome-container h1 {
+            font-size: 48px;
+        }
+        .welcome-container p {
+            font-size: 24px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image-container {
+            height: 230px;
+            overflow: hidden;
+        }
+        .product-image {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+        .product-details {
+            padding: 10px;
+        }
+        .product-name {
+            margin: 0;
+            font-size: 18px;
+            color: #212121;
+        }
+        .product-price {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .details,
+        .cart {
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+        .details {
+            background-color: #007bff;
+        }
+        .cart {
+            background-color: #28a745;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f57c00; /* Orange background */
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px; /* Adjust logo height as needed */
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: #ffffff; /* White text color */
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .welcome-container {
+           background-color: #f57c00;
+            background-position: center;
+            color: #ffffff; /* White text color for better contrast */
+            border-radius: 10px;
+            padding: 100px; /* Adjust padding as needed */
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #ffffff; /* White background */
+            border: 1px solid #f57c00; /* Orange border */
+            color: #f57c00; /* Orange text color */
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .cart img {
+            height: 30px; /* Adjust cart icon size as needed */
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background-color: #ffffff; /* White background */
+            border: none;
+            color: #f57c00; /* Orange text color */
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-btn:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            min-width: 120px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: #212121; /* Dark text color */
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://unimart12.s3.eu-north-1.amazonaws.com/Unimart+(1).png" alt="Logo">
+            <h1 style="text-decoration: none;">UniMart</h1>
+        
+        </div>
+        
+          <div>
+            <a href="../cart/"><button>Cart</button></a>
+            <a href="../make_order"><button>Orders</button></a>
+            <a href="../user_dashboard"><button>Home</button></a>
+            <a href="../login"><button>Log Out</button></a>
+    </nav>
+    <div class="container">
+        <div class="shopheader">
+            <div class="logo">
+                <img src="{{seller.shop_logo_url}}" alt="Logo">
+                <h1 style="color: #000000;">{{ seller.shop_name }}</h1>
+            </div>
+            
+        </div>
+        <div class="welcome-container">
+            <h1>Welcome to {{ seller.shop_name }}</h1>
+            <p>Find the best products here!</p>
+        </div>
+        <h2>Explore our Products</h2>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img class="product-image" src="{{ product.photo_url }}" alt="{{ product.name }}">
+                </div>
+                <div class="product-details">
+                    <h5 class="product-name">{{ product.name }}</h5>
+                    <p class="product-price">&#8377; {{ product.price }}</p>
+                    <div class="buttons">
+                        <a href="{%url 'product_details' product.id %}" class="details">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function addToCart(productName) {
+            // Add your add to cart functionality here
+            console.log(productName + ' added to cart');
+        }
+    </script>
+</body>
+</html>

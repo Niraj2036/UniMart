@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+            color: #212121; /* Dark text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f57c00; /* Orange background */
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px; /* Adjust logo height as needed */
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: #ffffff; /* White text color */
+            margin: 0;
+            text-decoration: none !important;
+            font-size: 24px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #ffffff; /* White background */
+            border: 1px solid #f57c00; /* Orange border */
+            color: #f57c00; /* Orange text color */
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .cart img {
+            height: 30px; /* Adjust cart icon size as needed */
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background-color: #ffffff; /* White background */
+            border: none;
+            color: #f57c00; /* Orange text color */
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-btn:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            min-width: 120px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: #212121; /* Dark text color */
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f57c00; /* Orange background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Welcome Container Styles */
+        .welcome-container {
+            background-image: url('https://drive.google.com/uc?export=view&id=1lFFGlj3B0x-pb5i_Tpgc6bxXWNW9mVg3');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff; /* White text color for better contrast */
+            border-radius: 10px;
+            padding: 100px; /* Adjust padding as needed */
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-container h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Explore Heading Styles */
+        .explore-heading {
+            color: #f57c00; /* Orange color */
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        /* Seller Grid Styles */
+        .seller-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .seller-card {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #f57c00; /* Orange border */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .seller-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .seller-logo img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #f57c00; /* Orange border bottom */
+        }
+
+        .seller-details {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .seller-details h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #212121; /* Dark text color */
+        }
+
+        .seller-details span {
+            font-size: 20px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media only screen and (max-width: 768px) {
+            .welcome-container {
+                padding: 80px;
+            }
+            .welcome-container h1 {
+                font-size: 36px;
+            }
+            .welcome-message {
+                font-size: 18px;
+            }
+        }
+
+        @media only screen and (max-width: 576px) {
+            .welcome-container {
+                padding: 60px;
+            }
+            .welcome-container h1 {
+                font-size: 24px;
+            }
+            .welcome-message {
+                font-size: 16px;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dropdown {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://unimart12.s3.eu-north-1.amazonaws.com/Unimart+(1).png" alt="Logo">
+            <h1 style="text-decoration: none;">UniMart</h1>
+        
+        </div>
+        
+          <div>
+            <a href="cart/"><button>Cart</button></a>
+            <a href="make_order"><button>Orders</button></a>
+            <a href="user_dashboard"><button>Home</button></a>
+            <a href="login"><button>Log Out</button></a>
+          </div>
+    </nav>
+
+    <!-- Welcome Container -->
+     <section style="margin: 20px;">
+    <div class="welcome-container" style="background-color: #f57c00;">
+        <h1>Welcome to UniMart</h1>
+        <p class="welcome-message">Local Store in Your Area, Delivering Convenience to Your Doorstep!</p>
+    </div>
+
+    <!-- Explore Stores Near You -->
+    <h2 class="explore-heading">Explore Stores Near You</h2>
+
+    <!-- Filter by Category -->
+    <div class="container">
+        <label for="category">Filter by Category:</label>
+        <select id="category" name="category" onchange="filterStoresByCategory()">
+            <option value="" disabled selected>Select a category</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="grocery">Grocery</option>
+            <option value="home_appliances">Home Appliances</option>
+            <option value="books">Books</option>
+            <option value="toys">Toys</option>
+        </select>
+    </div>
+
+    <!-- Seller Cards -->
+    <div class="seller-grid" id="seller-grid">
+        {% for seller in seller_data %}
+            <div class="seller-card" data-category="{{ seller.shop_category }}">
+                
+                <div class="seller-logo">
+                    <img src="{{ seller.shop_logo_url }}" alt="{{ seller.shop_name }} Logo">
+                </div>
+                <div class="seller-details">
+                    <a href="{% url 'shop_details' seller.id %}" style="text-decoration: none;">
+                    <h3>{{ seller.shop_name }}</h3>
+                    <span>&rarr;</span>
+                </a>
+                </div>
+            
+            </div>
+        {% endfor %}
+        </div>
+     </section>
+
+        <!-- Repeat seller-card structure for each seller in seller_data -->
+        <!-- Example: -->
+        <!-- {% for seller in seller_data %}
+            <div class="seller-card" data-category="{{ seller.shop_category }}">
+                <div class="seller-logo">
+                    <img src="{{ seller.logo_url }}" alt="{{ seller.shop_name }} Logo">
+                </div>
+                <div class="seller-details">
+                    <h3>{{ seller.shop_name }}</h3>
+                    <span>&rarr;</span>
+                </div>
+            </div>
+        {% endfor %} -->
+    </div>
+
+    <script>
+        function filterStoresByCategory() {
+            var category = document.getElementById("category").value;
+            var sellers = document.getElementsByClassName("seller-card");
+
+            for (var i = 0; i < sellers.length; i++) {
+                if (category === "" || sellers[i].getAttribute("data-shop_catagory") === category) {
+                    sellers[i].style.display = "block";
+                } else {
+                    sellers[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
